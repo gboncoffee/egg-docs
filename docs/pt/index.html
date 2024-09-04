@@ -1,0 +1,1080 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="pt-br" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Documentação do EGG</title>
+  <style>
+    html {
+      line-height: 1.5;
+      font-family: Georgia, serif;
+      font-size: 20px;
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 1em;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, 'Lucida Console', Consolas, monospace;
+      font-size: 85%;
+      margin: 0;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      {   }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+    code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+    code span.at { color: #7d9029; } /* Attribute */
+    code span.bn { color: #40a070; } /* BaseN */
+    code span.bu { color: #008000; } /* BuiltIn */
+    code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #4070a0; } /* Char */
+    code span.cn { color: #880000; } /* Constant */
+    code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+    code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+    code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+    code span.dt { color: #902000; } /* DataType */
+    code span.dv { color: #40a070; } /* DecVal */
+    code span.er { color: #ff0000; font-weight: bold; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #40a070; } /* Float */
+    code span.fu { color: #06287e; } /* Function */
+    code span.im { color: #008000; font-weight: bold; } /* Import */
+    code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+    code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+    code span.op { color: #666666; } /* Operator */
+    code span.ot { color: #007020; } /* Other */
+    code span.pp { color: #bc7a00; } /* Preprocessor */
+    code span.sc { color: #4070a0; } /* SpecialChar */
+    code span.ss { color: #bb6688; } /* SpecialString */
+    code span.st { color: #4070a0; } /* String */
+    code span.va { color: #19177c; } /* Variable */
+    code span.vs { color: #4070a0; } /* VerbatimString */
+    code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+</head>
+<body>
+<nav id="TOC" role="doc-toc">
+<ul>
+<li><a href="#uso">Uso</a>
+<ul>
+<li><a href="#assembly">Assembly</a></li>
+<li><a href="#chamadas">Chamadas</a></li>
+<li><a href="#debugger">Debugger</a></li>
+</ul></li>
+<li><a href="#mips32">MIPS32</a>
+<ul>
+<li><a href="#assembly-1">Assembly</a></li>
+<li><a href="#chamadas-environment-call">Chamadas (<em>environment
+call</em>)</a></li>
+<li><a href="#memória">Memória</a></li>
+</ul></li>
+<li><a href="#sagui">Sagui</a></li>
+<li><a href="#risc-v-im-32">RISC-V IM 32</a>
+<ul>
+<li><a href="#sintaxe-de-assembly">Sintaxe de Assembly</a></li>
+<li><a href="#chamadas-environment-call-1">Chamadas (<em>environment
+call</em>)</a></li>
+<li><a href="#exemplo">Exemplo</a></li>
+<li><a href="#memória-1">Memória</a></li>
+</ul></li>
+<li><a href="#risc-v-cheatsheet">RISC-V Cheatsheet</a>
+<ul>
+<li><a href="#instruções">Instruções</a>
+<ul>
+<li><a href="#aritméticas">Aritméticas</a></li>
+<li><a href="#aritméticas-com-imediato">Aritméticas com
+imediato</a></li>
+<li><a href="#loads-carregar-valores-da-memória">Loads (carregar valores
+da memória)</a></li>
+<li><a href="#stores-salvar-valores-na-memória">Stores (salvar valores
+na memória)</a></li>
+<li><a href="#branches-saltos-condicionais">Branches (saltos
+condicionais)</a></li>
+<li><a href="#jumps-saltos-incondicionais">Jumps (saltos
+incondicionais)</a></li>
+<li><a href="#miscelânea">Miscelânea</a></li>
+</ul></li>
+<li><a href="#registradores">Registradores</a></li>
+<li><a href="#sintaxe">Sintaxe</a></li>
+<li><a href="#chamadas-do-emulador">Chamadas do emulador</a></li>
+<li><a href="#carregar-imediatos">Carregar imediatos</a></li>
+<li><a href="#manipular-a-stack">Manipular a stack</a></li>
+<li><a href="#chamar-funções">Chamar funções</a></li>
+<li><a href="#truques-do-debugger">Truques do debugger</a>
+<ul>
+<li><a href="#ver-o-pc">Ver o PC</a></li>
+<li><a href="#dump-do-programa">Dump do programa</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</nav>
+<h1 id="uso">Uso</h1>
+<p>Rode o emulador com um arquivo de Assembly para montá-lo e iniciar
+uma máquina rodando o programa. O backend utilizado por padrão é uma
+máquina de RISC-V 32 bits. Use a opção <code>-a</code> ou
+<code>-arch</code> para mudar a arquitetura. A opção <code>-h</code>
+mostra todas as opções de linha de comando e a opção <code>-l</code>
+mostra todas as arquiteturas suportadas.</p>
+<h2 id="assembly">Assembly</h2>
+<p>A sintaxe de Assembly varia com a arquitetura, porém, como o projeto
+provém uma biblioteca para tal, os backends podem usar uma sintaxe bem
+semelhante (RISC-V e MIPS usam). Exemplo:</p>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode asm"><code class="sourceCode fasm"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">; Ponto e vírgula define comentários até o fim da linha.</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co">; Labels são definidos com dois pontos.</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">label:</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    <span class="co">; Os argumentos começam sempre pelo destino.</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    addi t0<span class="op">,</span> zero<span class="op">,</span> <span class="dv">2</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    <span class="co">; Também é possível colocar instruções logo após os labels.</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="fu">label2:</span> <span class="bu">add</span> t0<span class="op">,</span> t0<span class="op">,</span> t0</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    <span class="co">; Não há parênteses como no RARS e stores usam imediatos normais.</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>    sb t0<span class="op">,</span> ra<span class="op">,</span> <span class="dv">3</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>    <span class="co">; Imediatos hexadecimais, octais e binários também são suportados.</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>    addi t1<span class="op">,</span> zero<span class="op">,</span> <span class="bn">0xff</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>    addi t1<span class="op">,</span> zero<span class="op">,</span> <span class="bn">0b</span><span class="er">010110</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>    addi t1<span class="op">,</span> zero<span class="op">,</span> <span class="bn">0o</span><span class="er">644</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>    addi t1<span class="op">,</span> zero<span class="op">,</span> <span class="dv">0755</span> <span class="co">; Um zero à esquerda também define um octal.</span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="co">; # define um literal até o final da linha.</span></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="co">; Literais são inseridos no binário (assim como &#39;db&#39; em outros assemblers).</span></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="co">; Se uma % é seguida de dois digitos hexadecimais, o valor hexadecimal é</span></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a><span class="co">; inserido. Use %% para inserir um % (ou %25).</span></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a><span class="fu">msg:</span></span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>#Hello<span class="op">,</span> World<span class="op">!%</span><span class="dv">0</span><span class="er">a</span></span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a><span class="co">; Algumas diretivas são suportadas. As diretivas &quot;bitsxx&quot; criam números literais </span></span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a><span class="co">; no código, com o tamanho em bits especificado:</span></span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>.bits8 <span class="bn">0xca</span> <span class="bn">0xfe</span> <span class="bn">0xba</span> <span class="bn">0xbe</span> <span class="bn">0xde</span> <span class="bn">0xad</span> <span class="bn">0xbe</span> <span class="bn">0xef</span></span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>.bits16 <span class="bn">0xcafe</span> <span class="bn">0xbabe</span> <span class="bn">0xdead</span> <span class="bn">0xbeef</span></span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>.bits32 <span class="bn">0xcafebabe</span> <span class="bn">0xdeadbeef</span></span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>.bits64 <span class="bn">0xcafebabedeadbeef</span></span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a><span class="co">; A diretiva &quot;space&quot; adiciona alguns bytes de espaço vazio no código:</span></span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>.space <span class="dv">16</span></span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a><span class="co">; A diretiva &quot;include&quot; faz um &quot;copia-cola&quot; de outro arquivo no código:</span></span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a>.<span class="bu">include</span> other<span class="op">-</span>asm<span class="op">.</span>asm</span></code></pre></div>
+<h2 id="chamadas">Chamadas</h2>
+<p>As chamadas (<em>environment calls</em>) respondidas pelo emulator
+são as seguintes. Consulte a documentação da arquitetura para
+realizá-las:</p>
+<ul>
+<li>BREAK (Número 1): Transfere o controle para o debugger ou finaliza a
+máquina.<br />
+Nenhum argumento.<br />
+</li>
+<li>READ (Número 2): Lê uma entrada da linha de comando.
+<ul>
+<li>Argumento 1: Endereço do buffer.<br />
+</li>
+<li>Argumento 2: Tamanho da entrada em bytes.<br />
+</li>
+</ul></li>
+<li>WRITE (Número 3): Escreve uma saída.
+<ul>
+<li>Argumento 1: Endereço do buffer.<br />
+</li>
+<li>Argumento 2: Tamanho da saída em bytes.</li>
+</ul></li>
+</ul>
+<h2 id="debugger">Debugger</h2>
+<p>A interface do debugger é semelhante à do <code>gdb</code> porém bem
+enxuta. Use a opção <code>-d</code> para entrar no debugger assim que
+iniciar o emulador. Não há comando <code>run</code>, como no
+<code>gdb</code>, pois não há necessidade de iniciar um processo do
+sistema. Os comandos <code>next</code> e <code>continue</code> podem ser
+utilizados para iniciar o programa normalmente. Use o comando
+<code>help</code> para ver todos os comandos disponíveis.</p>
+<h1 id="mips32">MIPS32</h1>
+<h2 id="assembly-1">Assembly</h2>
+<p>A implementação de MIPS32 para o EGG usa a sintaxe de Assembly
+padrão.</p>
+<h2 id="chamadas-environment-call">Chamadas (<em>environment
+call</em>)</h2>
+<p>Para realizar uma chamada (<em>environment call</em>), o número dela
+é colocado no registrador <code>v0</code> e os argumentos nos
+registradores <code>a0</code> e <code>a1</code>.</p>
+<p>Uma instrução <code>break</code> realiza a chamada BREAK.</p>
+<h2 id="memória">Memória</h2>
+<p>O programa montado é carregado no endereço <code>0</code> e o
+<code>pc</code> é inicializado em <code>0</code>.</p>
+<h1 id="sagui">Sagui</h1>
+<p>Sagui é uma arquitetura fantasia de 8 bits RISC, criada pelo
+Dr. Marco Zanata, professor da Universidade Federal do Paraná. A
+implementação no EGG possui uma extensão: a instrução
+<code>movr r0, r0</code> é interpretada como uma chamada BREAK.</p>
+<p>Ela usa a sintaxe padrão de Assembly. O assembler é bem burro,
+infelizmente. Ele não corrige nenhum imediato de endereço relativo,
+então basicamente você está por conta para computar todos os saltos
+manualmente. Boa sorte.</p>
+<figure>
+<img src="/static/sagui.png" alt="Instruções do Sagui" />
+<figcaption aria-hidden="true">Instruções do Sagui</figcaption>
+</figure>
+<h1 id="risc-v-im-32">RISC-V IM 32</h1>
+<h2 id="sintaxe-de-assembly">Sintaxe de Assembly</h2>
+<p>A implementação de RISC-V para o EGG usa a sintaxe de Assembly
+padrão. Ela implementa os registradores e instruções do conjunto base e
+da extensão de multiplicação descritos <a href="/static/riscv.pdf">nesse
+documento</a>.</p>
+<p>Para consulta, também há uma cheatsheet mais abaixo.</p>
+<h2 id="chamadas-environment-call-1">Chamadas (<em>environment
+call</em>)</h2>
+<p>Para realizar uma chamada (<em>environment call</em>), o número dela
+é colocado no registrador <code>a7</code> e os argumentos nos
+registradores <code>a0</code> e <code>a1</code>.</p>
+<p>Uma instrução <code>ebreak</code> realiza a chamada BREAK.</p>
+<h2 id="exemplo">Exemplo</h2>
+<p>Código de exemplo (escreve “Hello, World!”, quebra a linha e
+sai):</p>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode asm"><code class="sourceCode fasm"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>    addi a7<span class="op">,</span> zero<span class="op">,</span> <span class="dv">3</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    addi a0<span class="op">,</span> zero<span class="op">,</span> msg</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    addi a1<span class="op">,</span> zero<span class="op">,</span> <span class="dv">14</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    ecall</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    ebreak</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="fu">msg:</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>#Hello<span class="op">,</span> World<span class="op">!%</span><span class="dv">0</span><span class="er">a</span></span></code></pre></div>
+<h2 id="memória-1">Memória</h2>
+<p>O programa montado é carregado no endereço <code>0</code> e o
+<code>pc</code> é inicializado em <code>0</code>. O ponteiro da stack
+não é inicializado. Caso o programa faça uso da stack, ela deve ser
+inicializada no programa.</p>
+<h1 id="risc-v-cheatsheet">RISC-V Cheatsheet</h1>
+<h2 id="instruções">Instruções</h2>
+<h3 id="aritméticas">Aritméticas</h3>
+<table>
+<colgroup>
+<col style="width: 6%" />
+<col style="width: 12%" />
+<col style="width: 77%" />
+<col style="width: 3%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Mnemônico</th>
+<th>Argumentos</th>
+<th>Descrição</th>
+<th>Sinal</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>add</code></td>
+<td><code>rd</code>, <code>rs1</code>, <code>rs2</code></td>
+<td>Soma os valores de <code>rs1</code> e <code>rs2</code>, guardando o
+resultado em <code>rd</code>.</td>
+<td>Com.</td>
+</tr>
+<tr class="even">
+<td><code>sub</code></td>
+<td><code>rd</code>, <code>rs1</code>, <code>rs2</code></td>
+<td>Subtrai os valores de <code>rs1</code> e <code>rs2</code>, guardando
+o resultado em <code>rd</code>.</td>
+<td>Com.</td>
+</tr>
+<tr class="odd">
+<td><code>xor</code></td>
+<td><code>rd</code>, <code>rs1</code>, <code>rs2</code></td>
+<td>Realiza o OU EXCLUSIVO entre os valores de <code>rs1</code> e
+<code>rs2</code>, guardando o resultado em <code>rd</code>.</td>
+<td></td>
+</tr>
+<tr class="even">
+<td><code>or</code></td>
+<td><code>rd</code>, <code>rs1</code>, <code>rs2</code></td>
+<td>Realiza o OU lógico entre os valores de <code>rs1</code> e
+<code>rs2</code>, guardando o resultado em <code>rd</code>.</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td><code>and</code></td>
+<td><code>rd</code>, <code>rs1</code>, <code>rs2</code></td>
+<td>Realiza o E lógico entre os valores de <code>rs1</code> e
+<code>rs2</code>, guardando o resultado em <code>rd</code>.</td>
+<td></td>
+</tr>
+<tr class="even">
+<td><code>sll</code></td>
+<td><code>rd</code>, <code>rs1</code>, <code>rs2</code></td>
+<td>Realiza um shift lógico para a esquerda do valor de <code>rs1</code>
+pelo valor de <code>rs2</code>, guardando o resultado em
+<code>rd</code>.</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td><code>srl</code></td>
+<td><code>rd</code>, <code>rs1</code>, <code>rs2</code></td>
+<td>Realiza um shift lógico para a direita do valor de <code>rs1</code>
+pelo valor de <code>rs2</code>, guardando o resultado em
+<code>rd</code>.</td>
+<td></td>
+</tr>
+<tr class="even">
+<td><code>sra</code></td>
+<td><code>rd</code>, <code>rs1</code>, <code>rs2</code></td>
+<td>Realiza um shift aritmético para a direita do valor de
+<code>rs1</code> pelo valor de <code>rs2</code>, guardando o resultado
+em <code>rd</code>.</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td><code>slt</code></td>
+<td><code>rd</code>, <code>rs1</code>, <code>rs2</code></td>
+<td>Compara os valores de <code>rs1</code> e <code>rs2</code>. O
+resultado guardado em <code>rd</code> é 1 caso <code>rs1</code> &lt;
+<code>rs2</code>, e 0 caso contrário.</td>
+<td>Com.</td>
+</tr>
+<tr class="even">
+<td><code>sltu</code></td>
+<td><code>rd</code>, <code>rs1</code>, <code>rs2</code></td>
+<td>Igual à <code>slt</code>, porém considera os valores sem sinal.</td>
+<td>Sem.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="extensão-de-multiplicação">Extensão de multiplicação</h4>
+<table>
+<colgroup>
+<col style="width: 7%" />
+<col style="width: 14%" />
+<col style="width: 72%" />
+<col style="width: 4%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Mnemônico</th>
+<th>Argumentos</th>
+<th>Descrição</th>
+<th>Sinal</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>mul</code></td>
+<td><code>rd</code>, <code>rs1</code>, <code>rs2</code></td>
+<td>Multiplica os valores de <code>rs1</code> e <code>rs2</code>,
+guardando o resultado em <code>rd</code>.</td>
+<td>Com.</td>
+</tr>
+<tr class="even">
+<td><code>mulh</code></td>
+<td><code>rd</code>, <code>rs1</code>, <code>rs2</code></td>
+<td>Multiplica os valores de <code>rs1</code> e <code>rs2</code>,
+guardando a parte alta do resultado em <code>rd</code>.</td>
+<td>Com.</td>
+</tr>
+<tr class="odd">
+<td><code>mulsu</code></td>
+<td><code>rd</code>, <code>rs1</code>, <code>rs2</code></td>
+<td>Igual à <code>mulh</code>, porém considera o valor de
+<code>rs1</code> COM SINAL e o valor de <code>rs2</code> SEM SINAL.</td>
+<td>Misto.</td>
+</tr>
+<tr class="even">
+<td><code>mulu</code></td>
+<td><code>rd</code>, <code>rs1</code>, <code>rs2</code></td>
+<td>Igual à <code>mulh</code>, porém considera os valores sem
+sinal.</td>
+<td>Sem.</td>
+</tr>
+<tr class="odd">
+<td><code>div</code></td>
+<td><code>rd</code>, <code>rs1</code>, <code>rs2</code></td>
+<td>Divide o valor de <code>rs1</code> pelo valor de <code>rs2</code>,
+guardando o resultado em <code>rd</code>.</td>
+<td>Com.</td>
+</tr>
+<tr class="even">
+<td><code>divu</code></td>
+<td><code>rd</code>, <code>rs1</code>, <code>rs2</code></td>
+<td>Igual à <code>div</code>, porém considera os valores sem sinal.</td>
+<td>Sem.</td>
+</tr>
+<tr class="odd">
+<td><code>rem</code></td>
+<td><code>rd</code>, <code>rs1</code>, <code>rs2</code></td>
+<td>Guarda em <code>rd</code> o resto da divisão do valor de
+<code>rs1</code> pelo valor de <code>rs2</code>.</td>
+<td>Com.</td>
+</tr>
+<tr class="even">
+<td><code>remu</code></td>
+<td><code>rd</code>, <code>rs1</code>, <code>rs2</code></td>
+<td>Igual à <code>rem</code>, porém considera os valores sem sinal.</td>
+<td>Sem.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="aritméticas-com-imediato">Aritméticas com imediato</h3>
+<table>
+<colgroup>
+<col style="width: 6%" />
+<col style="width: 12%" />
+<col style="width: 77%" />
+<col style="width: 3%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Mnemônico</th>
+<th>Argumentos</th>
+<th>Descrição</th>
+<th>Sinal</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>addi</code></td>
+<td><code>rd</code>, <code>rs1</code>, <code>imm</code></td>
+<td>Soma o valor de <code>rs1</code> com o <code>imm</code>, guardando o
+resultado em rd.</td>
+<td>Com.</td>
+</tr>
+<tr class="even">
+<td><code>xori</code></td>
+<td><code>rd</code>, <code>rs1</code>, <code>imm</code></td>
+<td>Realiza o OU EXCLUSIVO entre o valor de <code>rs1</code> e o
+<code>imm</code>, guardando o resultado em rd.</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td><code>ori</code></td>
+<td><code>rd</code>, <code>rs1</code>, <code>imm</code></td>
+<td>Realiza o OU lógico entre o valor de <code>rs1</code> e
+<code>imm</code>, guardando o resultado em rd.</td>
+<td></td>
+</tr>
+<tr class="even">
+<td><code>andi</code></td>
+<td><code>rd</code>, <code>rs1</code>, <code>imm</code></td>
+<td>Realiza o E lógico entre o valor de <code>rs1</code> e
+<code>imm</code>, guardando o resultado em rd.</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td><code>slli</code></td>
+<td><code>rd</code>, <code>rs1</code>, <code>imm</code></td>
+<td>Realiza um shift lógico para a esquerda do valor de <code>rs1</code>
+pelo <code>imm</code>, guardando o resultado em rd.</td>
+<td></td>
+</tr>
+<tr class="even">
+<td><code>srli</code></td>
+<td><code>rd</code>, <code>rs1</code>, <code>imm</code></td>
+<td>Realiza um shift lógico para a direita do valor de <code>rs1</code>
+pelo <code>imm</code>, guardando o resultado em rd.</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td><code>srai</code></td>
+<td><code>rd</code>, <code>rs1</code>, <code>imm</code></td>
+<td>Realiza um shift aritmético para a direita do valor de
+<code>rs1</code> pelo <code>imm</code>, guardando o resultado em
+rd.</td>
+<td></td>
+</tr>
+<tr class="even">
+<td><code>slti</code></td>
+<td><code>rd</code>, <code>rs1</code>, <code>imm</code></td>
+<td>Compara o valor de <code>rs1</code> com o <code>imm</code>. O
+resultado guardado em rd é 1 caso <code>rs1</code> &lt;
+<code>imm</code>, e 0 caso contrário.</td>
+<td>Com.</td>
+</tr>
+<tr class="odd">
+<td><code>sltiu</code></td>
+<td><code>rd</code>, <code>rs1</code>, <code>imm</code></td>
+<td>Igual à <code>slt</code>, porém considera os valores sem sinal.</td>
+<td>Sem.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="loads-carregar-valores-da-memória">Loads (carregar valores da
+memória)</h3>
+<table>
+<colgroup>
+<col style="width: 8%" />
+<col style="width: 17%" />
+<col style="width: 69%" />
+<col style="width: 4%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Mnemônico</th>
+<th>Argumentos</th>
+<th>Descrição</th>
+<th>Sinal</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>lb</code></td>
+<td><code>rd</code>, <code>rs1</code>, <code>imm</code></td>
+<td>Carrega 1 byte do endereço dado por <code>rs1 + imm</code> na região
+baixa de <code>rd</code>.</td>
+<td>Com.</td>
+</tr>
+<tr class="even">
+<td><code>lh</code></td>
+<td><code>rd</code>, <code>rs1</code>, <code>imm</code></td>
+<td>Carrega 2 bytes do endereço dado por <code>rs1 + imm</code> na
+região baixa de <code>rd</code>.</td>
+<td>Com.</td>
+</tr>
+<tr class="odd">
+<td><code>lw</code></td>
+<td><code>rd</code>, <code>rs1</code>, <code>imm</code></td>
+<td>Carrega 4 bytes do endereço dado por <code>rs1 + imm</code> no
+<code>rd</code>.</td>
+<td></td>
+</tr>
+<tr class="even">
+<td><code>lbu</code></td>
+<td><code>rd</code>, <code>rs1</code>, <code>imm</code></td>
+<td>Igual à <code>lb</code> porém não extende o sinal do valor
+carregado.</td>
+<td>Sem.</td>
+</tr>
+<tr class="odd">
+<td><code>lhu</code></td>
+<td><code>rd</code>, <code>rs1</code>, <code>imm</code></td>
+<td>Igual à <code>lh</code> porém não extende o sinal do valor
+carregado.</td>
+<td>Sem.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="stores-salvar-valores-na-memória">Stores (salvar valores na
+memória)</h3>
+<table>
+<colgroup>
+<col style="width: 8%" />
+<col style="width: 17%" />
+<col style="width: 68%" />
+<col style="width: 4%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Mnemônico</th>
+<th>Argumentos</th>
+<th>Descrição</th>
+<th>Sinal</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>sb</code></td>
+<td><code>rd</code>, <code>rs1</code>, <code>imm</code></td>
+<td>Salva o byte da região baixa de <code>rs1</code> no endereço dado
+por <code>rd + imm</code>.</td>
+<td></td>
+</tr>
+<tr class="even">
+<td><code>sh</code></td>
+<td><code>rd</code>, <code>rs1</code>, <code>imm</code></td>
+<td>Salva 2 bytes da região baixa de <code>rs1</code> no endereço dado
+por <code>rd + imm</code>.</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td><code>sw</code></td>
+<td><code>rd</code>, <code>rs1</code>, <code>imm</code></td>
+<td>Salva o valor de <code>rs1</code> no endereço dado por
+<code>rd + imm</code>.</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="branches-saltos-condicionais">Branches (saltos
+condicionais)</h3>
+<table>
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 22%" />
+<col style="width: 60%" />
+<col style="width: 5%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Mnemônico</th>
+<th>Argumentos</th>
+<th>Descrição</th>
+<th>Sinal</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>beq</code></td>
+<td><code>rs1</code>, <code>rs2</code>, <code>imm</code></td>
+<td>Salta para <code>PC + imm</code> caso <code>rs1 == rs2</code>.</td>
+<td></td>
+</tr>
+<tr class="even">
+<td><code>bne</code></td>
+<td><code>rs1</code>, <code>rs2</code>, <code>imm</code></td>
+<td>Salta para <code>PC + imm</code> caso <code>rs1 != rs2</code>.</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td><code>blt</code></td>
+<td><code>rs1</code>, <code>rs2</code>, <code>imm</code></td>
+<td>Salta para <code>PC + imm</code> caso
+<code>rs1 &lt; rs2</code>.</td>
+<td>Com.</td>
+</tr>
+<tr class="even">
+<td><code>bge</code></td>
+<td><code>rs1</code>, <code>rs2</code>, <code>imm</code></td>
+<td>Salta para <code>PC + imm</code> caso
+<code>rs1 &gt;= rs2</code>.</td>
+<td>Com.</td>
+</tr>
+<tr class="odd">
+<td><code>bltu</code></td>
+<td><code>rs1</code>, <code>rs2</code>, <code>imm</code></td>
+<td>Igual à <code>blt</code> porém realiza a comparação sem sinal.</td>
+<td>Sem.</td>
+</tr>
+<tr class="even">
+<td><code>bgeu</code></td>
+<td><code>rs1</code>, <code>rs2</code>, <code>imm</code></td>
+<td>Igual à <code>bge</code> porém realiza a comparação sem sinal.</td>
+<td>Sem.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="jumps-saltos-incondicionais">Jumps (saltos incondicionais)</h3>
+<table>
+<colgroup>
+<col style="width: 8%" />
+<col style="width: 17%" />
+<col style="width: 69%" />
+<col style="width: 4%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Mnemônico</th>
+<th>Argumentos</th>
+<th>Descrição</th>
+<th>Sinal</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>jal</code></td>
+<td><code>rd</code>, <code>imm</code></td>
+<td>Salta para <code>PC + imm</code>, salvando o valor de
+<code>PC + 4</code> em <code>rd</code>.</td>
+<td>Com.</td>
+</tr>
+<tr class="even">
+<td><code>jalr</code></td>
+<td><code>rd</code>, <code>rs1</code>, <code>imm</code></td>
+<td>Salta para o valor de <code>rs1 + imm</code>, salvando o valor de
+<code>PC + 4</code> em <code>rd</code>.</td>
+<td>Com.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="miscelânea">Miscelânea</h3>
+<table>
+<colgroup>
+<col style="width: 8%" />
+<col style="width: 9%" />
+<col style="width: 77%" />
+<col style="width: 4%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Mnemônico</th>
+<th>Argumentos</th>
+<th>Descrição</th>
+<th>Sinal</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>lui</code></td>
+<td><code>rd</code>, <code>imm</code></td>
+<td>Carrega o valor <code>imm &lt;&lt; 12</code> em
+<code>rd</code>.</td>
+<td></td>
+</tr>
+<tr class="even">
+<td><code>auipc</code></td>
+<td><code>rd</code>, <code>imm</code></td>
+<td>Carrega o valor <code>PC + (imm &lt;&lt; 12)</code> em
+<code>rd</code>.</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td><code>ecall</code></td>
+<td></td>
+<td>Realiza uma chamada ao emulador. (ver seção de chamadas)</td>
+<td></td>
+</tr>
+<tr class="even">
+<td><code>ebreak</code></td>
+<td></td>
+<td>Equivalente à <code>ecall</code>, porém não considera argumentos,
+realiza sempre uma chamada BREAK</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h2 id="registradores">Registradores</h2>
+<p>Registradores salvos devem ter seu valor original restaurado pela
+função que os utilizou.</p>
+<table>
+<colgroup>
+<col style="width: 18%" />
+<col style="width: 14%" />
+<col style="width: 55%" />
+<col style="width: 11%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Registrador(es)</th>
+<th>Nome(es)</th>
+<th>Função</th>
+<th>Salvo(s)?</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>x0</code></td>
+<td><code>zero</code></td>
+<td>Constante zero. Escrever nele não tem efeito.</td>
+<td></td>
+</tr>
+<tr class="even">
+<td><code>x1</code></td>
+<td><code>ra</code></td>
+<td>Endereço de retorno. Utilizado em saltos.</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td><code>x2</code></td>
+<td><code>sp</code></td>
+<td>Endereço da pilha (ela cresce para baixo).</td>
+<td></td>
+</tr>
+<tr class="even">
+<td><code>x3</code></td>
+<td><code>gp</code></td>
+<td>Pointeiro global.</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td><code>x4</code></td>
+<td><code>tp</code></td>
+<td>Pointeiro da thread.</td>
+<td></td>
+</tr>
+<tr class="even">
+<td><code>x5</code> à <code>x7</code></td>
+<td><code>t0</code> à <code>t2</code></td>
+<td>Uso geral, temporários.</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td><code>x8</code> e <code>x9</code></td>
+<td><code>s0</code> e <code>s1</code></td>
+<td>Uso geral, salvos.</td>
+<td>Sim.</td>
+</tr>
+<tr class="even">
+<td><code>x10</code> e <code>x11</code></td>
+<td><code>a0</code> e <code>a1</code></td>
+<td>Argumentos de função e valores de retorno.</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td><code>x12</code> à <code>x17</code></td>
+<td><code>a2</code> à <code>a7</code></td>
+<td>Argumentos de função.</td>
+<td></td>
+</tr>
+<tr class="even">
+<td><code>x18</code> à <code>x27</code></td>
+<td><code>s2</code> à <code>s11</code></td>
+<td>Uso geral, salvos.</td>
+<td>Sim.</td>
+</tr>
+<tr class="odd">
+<td><code>x28</code> à <code>x31</code></td>
+<td><code>t3</code> à <code>t6</code></td>
+<td>Uso geral, temporários.</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h2 id="sintaxe">Sintaxe</h2>
+<div class="sourceCode" id="cb3"><pre
+class="sourceCode asm"><code class="sourceCode fasm"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>    <span class="co">; Um ponto e vírgula introduz comentários</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    addi a7<span class="op">,</span> zero<span class="op">,</span> <span class="dv">3</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    addi a0<span class="op">,</span> zero<span class="op">,</span> msg</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    addi a1<span class="op">,</span> zero<span class="op">,</span> <span class="dv">14</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    ecall</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    ebreak</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="fu">msg:</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>#Hello<span class="op">,</span> World<span class="op">!%</span><span class="dv">0</span><span class="er">a</span></span></code></pre></div>
+<h2 id="chamadas-do-emulador">Chamadas do emulador</h2>
+<p>Coloca-se o número em ‘a7’ e argumentos em ‘a0’ e ‘a1’.</p>
+<div class="sourceCode" id="cb4"><pre
+class="sourceCode asm"><code class="sourceCode fasm"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>    <span class="co">; Sair/Parar</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    addi a7<span class="op">,</span> zero<span class="op">,</span> <span class="dv">1</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    ecall</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    <span class="co">; Sair/Parar (mais simples)</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    ebreak</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    <span class="co">; Ler texto</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>    addi a7<span class="op">,</span> zero<span class="op">,</span> <span class="dv">2</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>    addi a0<span class="op">,</span> zero<span class="op">,</span> <span class="op">&lt;</span>endereço<span class="op">&gt;</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>    addi a1<span class="op">,</span> zero<span class="op">,</span> <span class="op">&lt;</span>tamanho<span class="op">&gt;</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>    ecall</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>    <span class="co">; Imprimir texto</span></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>    addi a7<span class="op">,</span> zero<span class="op">,</span> <span class="dv">3</span></span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>    addi a0<span class="op">,</span> zero<span class="op">,</span> <span class="op">&lt;</span>endereço<span class="op">&gt;</span></span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>    addi a1<span class="op">,</span> zero<span class="op">,</span> <span class="op">&lt;</span>tamanho<span class="op">&gt;</span></span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>    ecall</span></code></pre></div>
+<h2 id="carregar-imediatos">Carregar imediatos</h2>
+<div class="sourceCode" id="cb5"><pre
+class="sourceCode asm"><code class="sourceCode fasm"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>    <span class="co">; Números menores que 12 bits (em complemento de 2).</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    addi <span class="op">&lt;</span>reg<span class="op">&gt;,</span> zero<span class="op">,</span> <span class="op">&lt;</span>num<span class="op">&gt;</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    <span class="co">; Exemplo: carregar o número 42 em t0</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    addi t0<span class="op">,</span> zero<span class="op">,</span> <span class="dv">42</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    <span class="co">; Números maiores que 12 bits</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>    lui <span class="op">&lt;</span>reg<span class="op">&gt;,</span> <span class="op">&lt;</span>parte alta<span class="op">&gt;</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>    addi <span class="op">&lt;</span>reg<span class="op">&gt;,</span> <span class="op">&lt;</span>reg<span class="op">&gt;,</span> <span class="op">&lt;</span>parte baixa<span class="op">&gt;</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>    <span class="co">; Exemplo: carregar o número 0x6747 em t0</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>    lui t0<span class="op">,</span> <span class="bn">0x6</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>    addi t0<span class="op">,</span> t0<span class="op">,</span> <span class="bn">0x747</span></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>    <span class="co">; Números maiores que 12 bits sem extensão de sinal</span></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>    <span class="co">; (caso em que o bit 11 é 1 porém não se quer extender o sinal)</span></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>    <span class="co">; Para isso, adiciona-se 1 na parte alta para assim corrigir o valor com a extensão</span></span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>    lui <span class="op">&lt;</span>reg<span class="op">&gt;,</span> <span class="op">&lt;</span>parte alta <span class="op">+</span> <span class="dv">1</span><span class="op">&gt;</span></span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>    addi <span class="op">&lt;</span>reg<span class="op">&gt;,</span> <span class="op">&lt;</span>reg<span class="op">&gt;,</span> <span class="op">&lt;</span>parte baixa<span class="op">&gt;</span></span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>    <span class="co">; Exemplo: carregar o número 0x5a47 em t0</span></span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>    lui t0<span class="op">,</span> <span class="bn">0x6</span></span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>    addi t0<span class="op">,</span> t0<span class="op">,</span> <span class="bn">0xa47</span></span></code></pre></div>
+<h2 id="manipular-a-stack">Manipular a stack</h2>
+<div class="sourceCode" id="cb6"><pre
+class="sourceCode asm"><code class="sourceCode fasm"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>    <span class="co">; Inicializar</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    addi <span class="kw">sp</span><span class="op">,</span> zero<span class="op">,</span> <span class="dv">0</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    <span class="co">; &quot;push&quot;</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    addi <span class="kw">sp</span><span class="op">,</span> <span class="kw">sp</span><span class="op">,</span> <span class="op">-</span><span class="dv">4</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    sw <span class="kw">sp</span><span class="op">,</span> <span class="op">&lt;</span>reg<span class="op">&gt;,</span> <span class="dv">0</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>    <span class="co">; &quot;pop&quot;</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>    addi <span class="kw">sp</span><span class="op">,</span> <span class="kw">sp</span><span class="op">,</span> <span class="dv">4</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>    lw <span class="op">&lt;</span>reg<span class="op">&gt;,</span> <span class="kw">sp</span><span class="op">,</span> <span class="op">-</span><span class="dv">4</span></span></code></pre></div>
+<h2 id="chamar-funções">Chamar funções</h2>
+<p>Os argumentos e retornos ficam nos registradores com letra ‘a’.</p>
+<div class="sourceCode" id="cb7"><pre
+class="sourceCode asm"><code class="sourceCode fasm"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>    <span class="co">; Chamar função &quot;func&quot;</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    jal ra<span class="op">,</span> func</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    <span class="co">; Retornar</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>    jalr zero<span class="op">,</span> ra<span class="op">,</span> <span class="dv">0</span></span></code></pre></div>
+<p>Para chamar uma função mais longe que 20 bits, precisa-se construir o
+endereço e então usar ‘jalr’:</p>
+<div class="sourceCode" id="cb8"><pre
+class="sourceCode asm"><code class="sourceCode fasm"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>    jalr ra<span class="op">,</span> <span class="op">&lt;</span>reg<span class="op">&gt;,</span> <span class="dv">0</span></span></code></pre></div>
+<h2 id="truques-do-debugger">Truques do debugger</h2>
+<h3 id="ver-o-pc">Ver o PC</h3>
+<p>É possível utilizar o comando <code>print</code> com a expressão
+<code>#1</code> para ver o PC. <code>#1</code> significa “ver uma
+instrução a partir do PC”. Exemplo:</p>
+<pre><code>egg&gt; print #1
+0xcafebabe: func: add  t0 a0 a1</code></pre>
+<p>Nesse exemplo, o PC está no endereço <code>0xcafebabe</code>, onde há
+uma etiqueta <code>func</code>, e a instrução é um <code>add</code>,
+guardando a soma de <code>a0</code> e <code>a1</code> em
+<code>t0</code>.</p>
+<h3 id="dump-do-programa">Dump do programa</h3>
+<p>É possível utilizar o EGG para montar um programa em Assembly e
+guardar em um arquivo. Para isso, abre-se o programa no emulador e
+utiliza-se o seguinte comando:</p>
+<pre><code>egg&gt; dump # &lt;nome do arquivo&gt;</code></pre>
+<p>Substituindo <code>&lt;nome do arquivo&gt;</code> pelo nome que
+queira salvar o arquivo do programa. Note que esse arquivo não terá
+nenhum formato especial: ele conterá apenas os bytes correspondentes às
+instruções do programa, junto com literais que forem adicionados.</p>
+</body>
+</html>
