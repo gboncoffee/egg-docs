@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
 <head>
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc" />
@@ -7,9 +7,6 @@
   <title>EGG Docs</title>
   <style>
     html {
-      line-height: 1.5;
-      font-family: Georgia, serif;
-      font-size: 20px;
       color: #1a1a1a;
       background-color: #fdfdfd;
     }
@@ -28,13 +25,16 @@
     @media (max-width: 600px) {
       body {
         font-size: 0.9em;
-        padding: 1em;
+        padding: 12px;
       }
       h1 {
         font-size: 1.8em;
       }
     }
     @media print {
+      html {
+        background-color: white;
+      }
       body {
         background-color: transparent;
         color: black;
@@ -84,9 +84,10 @@
       color: #606060;
     }
     code {
-      font-family: Menlo, Monaco, 'Lucida Console', Consolas, monospace;
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
       font-size: 85%;
       margin: 0;
+      hyphens: manual;
     }
     pre {
       margin: 1em 0;
@@ -148,12 +149,22 @@
     }
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
-    span.underline{text-decoration: underline;}
-    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
-    ul.task-list{list-style: none;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+    /* CSS for syntax highlighting */
     pre > code.sourceCode { white-space: pre; position: relative; }
-    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span { line-height: 1.25; }
     pre > code.sourceCode > span:empty { height: 1.2em; }
     .sourceCode { overflow: visible; }
     code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -215,32 +226,37 @@
     code span.va { color: #19177c; } /* Variable */
     code span.vs { color: #4070a0; } /* VerbatimString */
     code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
   </style>
 </head>
 <body>
+<header id="title-block-header">
+<h1 class="title">EGG Docs</h1>
+</header>
 <nav id="TOC" role="doc-toc">
 <ul>
-<li><a href="#usage">Usage</a>
+<li><a href="#usage" id="toc-usage">Usage</a>
 <ul>
-<li><a href="#assembly">Assembly</a></li>
-<li><a href="#calls">Calls</a></li>
-<li><a href="#debugger">Debugger</a></li>
+<li><a href="#assembly" id="toc-assembly">Assembly</a></li>
+<li><a href="#calls" id="toc-calls">Calls</a></li>
+<li><a href="#debugger" id="toc-debugger">Debugger</a></li>
 </ul></li>
-<li><a href="#mips32">MIPS32</a>
+<li><a href="#risc-v-im-32" id="toc-risc-v-im-32">RISC-V IM 32</a>
 <ul>
-<li><a href="#assembly-1">Assembly</a></li>
-<li><a href="#environment-calls">Environment calls</a></li>
-<li><a href="#memory">Memory</a></li>
+<li><a href="#assembly-1" id="toc-assembly-1">Assembly</a></li>
+<li><a href="#environment-calls" id="toc-environment-calls">Environment
+calls</a></li>
+<li><a href="#example" id="toc-example">Example</a></li>
+<li><a href="#memory" id="toc-memory">Memory</a></li>
 </ul></li>
-<li><a href="#sagui">Sagui</a></li>
-<li><a href="#risc-v-im-32">RISC-V IM 32</a>
+<li><a href="#mips32" id="toc-mips32">MIPS32</a>
 <ul>
-<li><a href="#assembly-2">Assembly</a></li>
-<li><a href="#environment-calls-1">Environment calls</a></li>
-<li><a href="#example">Example</a></li>
-<li><a href="#memory-1">Memory</a></li>
+<li><a href="#assembly-2" id="toc-assembly-2">Assembly</a></li>
+<li><a href="#environment-calls-1"
+id="toc-environment-calls-1">Environment calls</a></li>
+<li><a href="#memory-1" id="toc-memory-1">Memory</a></li>
 </ul></li>
+<li><a href="#sagui" id="toc-sagui">Sagui</a></li>
+<li><a href="#redux-v" id="toc-redux-v">REDUX-V</a></li>
 </ul>
 </nav>
 <h1 id="usage">Usage</h1>
@@ -322,37 +338,13 @@ startup. There’s no need of <code>run</code> command, as there’s no
 process. The <code>next</code> or the <code>continue</code> commands may
 be used to start running the program normally. Use <code>help</code> to
 see all available commands.</p>
-<h1 id="mips32">MIPS32</h1>
-<h2 id="assembly-1">Assembly</h2>
-<p>The MIPS32 implementation for EGG uses the standard Assembly
-syntax.</p>
-<h2 id="environment-calls">Environment calls</h2>
-<p>Environment call numbers are placed in the <code>v0</code> register,
-and arguments are placed in <code>a0</code> and <code>a1</code>.</p>
-<p>An <code>break</code> instruction will perform a BREAK call.</p>
-<h2 id="memory">Memory</h2>
-<p>The assembled program is loaded at the address <code>0</code> on the
-machine startup, and the <code>pc</code> register is set to
-<code>0</code>.</p>
-<h1 id="sagui">Sagui</h1>
-<p>Sagui is a fantasy 8 bit RISC architecture created by Dr. Marco
-Zanata, professor at Universidade Federal do Paraná. The implementation
-in EGG has one extension: a instruction <code>movr r0, r0</code> is
-actually interpreted as a BREAK system call.</p>
-<p>It uses the standard Assembly syntax. It’s assembler is very dumb,
-tho. It’ll not fix any relative-addressed immediate, so basically you’re
-on your own to compute all jumps manually. Good luck.</p>
-<figure>
-<img src="/static/sagui.png" alt="Sagui instructions" />
-<figcaption aria-hidden="true">Sagui instructions</figcaption>
-</figure>
 <h1 id="risc-v-im-32">RISC-V IM 32</h1>
-<h2 id="assembly-2">Assembly</h2>
+<h2 id="assembly-1">Assembly</h2>
 <p>The RISC-V implementation for EGG uses the standard Assembly syntax.
 It implements the registers and instructions from the base integer set
 and the multiplication extension described in <a
 href="/static/riscv.pdf">this</a> document.</p>
-<h2 id="environment-calls-1">Environment calls</h2>
+<h2 id="environment-calls">Environment calls</h2>
 <p>Environment call numbers are placed in the <code>a7</code> register,
 and arguments are placed in <code>a0</code> and <code>a1</code>.</p>
 <p>An <code>ebreak</code> instruction will perform a BREAK call.</p>
@@ -368,10 +360,39 @@ class="sourceCode asm"><code class="sourceCode fasm"><span id="cb2-1"><a href="#
 <span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="fu">msg:</span></span>
 <span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>#Hello<span class="op">,</span> World<span class="op">!%</span><span class="dv">0</span><span class="er">a</span></span></code></pre></div>
-<h2 id="memory-1">Memory</h2>
+<h2 id="memory">Memory</h2>
 <p>The assembled program is loaded at the address <code>0</code> on the
 machine startup, and the <code>pc</code> register is set to
 <code>0</code>. The stack pointer register is not initialized: the
 program should initialize it if it wants to use the stack.</p>
+<h1 id="mips32">MIPS32</h1>
+<h2 id="assembly-2">Assembly</h2>
+<p>The MIPS32 implementation for EGG uses the standard Assembly
+syntax.</p>
+<h2 id="environment-calls-1">Environment calls</h2>
+<p>Environment call numbers are placed in the <code>v0</code> register,
+and arguments are placed in <code>a0</code> and <code>a1</code>.</p>
+<p>An <code>break</code> instruction will perform a BREAK call.</p>
+<h2 id="memory-1">Memory</h2>
+<p>The assembled program is loaded at the address <code>0</code> on the
+machine startup, and the <code>pc</code> register is set to
+<code>0</code>.</p>
+<h1 id="sagui">Sagui</h1>
+<p>Sagui is a fantasy 8 bit RISC architecture created by Dr. Marco
+Zanata, professor at Universidade Federal do Paraná. The implementation
+in EGG has one extension: a instruction <code>movr r0, r0</code> is
+actually interpreted as a BREAK system call.</p>
+<p>It uses the standard Assembly syntax.</p>
+<figure>
+<img src="/static/sagui.png" alt="Sagui instructions" />
+<figcaption aria-hidden="true">Sagui instructions</figcaption>
+</figure>
+<h1 id="redux-v">REDUX-V</h1>
+<p>O REDUX-V é uma versão 8-bits do RISC-V.</p>
+<p>Ele usa a sintaxe Assembly padrão do EGG.</p>
+<figure>
+<img src="/static/reduxv.png" alt="redux-v" />
+<figcaption aria-hidden="true">redux-v</figcaption>
+</figure>
 </body>
 </html>
